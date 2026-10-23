@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Healthy Order – Participant data</title>
+  <link rel="stylesheet" href="onboarding.css">
+</head>
+<body>
+  <main>
+    <h1>Healthy Order – Participant data</h1>
+    <p class="muted">Research prototype. Not affiliated with Uber.</p>
+
+    <!-- Step 1: consent notice and input form -->
+    <section id="view-form" hidden>
+      <h2>Before you start</h2>
+      <p>
+        This extension is part of a research study. To link your participation to the study,
+        we ask for three pieces of information: your <strong>user ID</strong> (assigned by the study team),
+        your <strong>gender</strong> and your <strong>age range</strong>.
+      </p>
+      <ul>
+        <li>The data is stored <strong>only in this browser</strong> (extension storage). It is never sent anywhere.</li>
+        <li>The user ID is a random number from the study team. It is not linked to your Uber account,
+            your browser or any other identifier.</li>
+        <li>You can view, change or delete the data at any time on this page.
+            Uninstalling the extension also deletes it.</li>
+      </ul>
+      <p>Nothing is stored unless you give your consent below and confirm the summary.</p>
+
+      <form id="form" novalidate>
+        <div class="field">
+          <label class="check">
+            <input type="checkbox" id="consent" name="consent">
+            I have read the notice above and agree that the three fields are stored in this browser.
+          </label>
+          <p class="error" data-error-for="consent"></p>
+        </div>
+
+        <div class="field">
+          <label for="userId">User ID</label>
+          <input type="text" id="userId" name="userId" inputmode="numeric" autocomplete="off"
+                 placeholder="e.g. 4711">
+          <p class="hint">Positive whole number, as given to you by the study team.</p>
+          <p class="error" data-error-for="userId"></p>
+        </div>
+
+        <fieldset class="field">
+          <legend>Gender</legend>
+          <label class="check"><input type="radio" name="gender" value="male"> Male</label>
+          <label class="check"><input type="radio" name="gender" value="female"> Female</label>
+          <label class="check"><input type="radio" name="gender" value="diverse"> Diverse</label>
+          <p class="error" data-error-for="gender"></p>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Age range</legend>
+          <label class="check"><input type="radio" name="ageRange" value="18-29"> 18–29</label>
+          <label class="check"><input type="radio" name="ageRange" value="30-44"> 30–44</label>
+          <label class="check"><input type="radio" name="ageRange" value="45-59"> 45–59</label>
+          <label class="check"><input type="radio" name="ageRange" value="60+"> 60 or older</label>
+          <p class="error" data-error-for="ageRange"></p>
+        </fieldset>
+
+        <p class="error" id="form-error"></p>
+        <div class="actions">
+          <button type="submit" class="primary">Review</button>
+          <button type="button" id="cancel-edit" hidden>Cancel</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Step 2: summary, save only after confirmation -->
+    <section id="view-summary" hidden>
+      <h2>Please confirm</h2>
+      <p>The following values will be stored in this browser:</p>
+      <dl id="summary-values" class="values"></dl>
+      <div class="actions">
+        <button type="button" id="save" class="primary">Save</button>
+        <button type="button" id="back">Back</button>
+      </div>
+    </section>
+
+    <!-- Step 3: stored data -->
+    <section id="view-stored" hidden>
+      <h2>Stored data</h2>
+      <p class="notice" id="stored-notice" hidden></p>
+      <p>These values are stored in this browser. They stay until you delete them or uninstall the extension.</p>
+      <dl id="stored-values" class="values"></dl>
+      <div class="actions">
+        <button type="button" id="edit" class="primary">Edit</button>
+        <button type="button" id="delete" class="danger">Delete all data</button>
+      </div>
+      <div id="delete-confirm" class="confirm" hidden>
+        <p>Delete the user ID, gender and age range from this browser? This cannot be undone.</p>
+        <div class="actions">
+          <button type="button" id="delete-yes" class="danger">Yes, delete</button>
+          <button type="button" id="delete-no">Cancel</button>
+        </div>
+      </div>
+    </section>
+
+    <p class="error" id="storage-error"></p>
+  </main>
+  <script src="onboarding.js"></script>
+</body>
+</html>
