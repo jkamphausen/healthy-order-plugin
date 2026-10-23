@@ -2,6 +2,12 @@
 
 Binding plan for all plugins (see `AGENTS.md`). Status: ⬜ open · 🔄 in progress · ✅ done
 
+## Infrastructure
+
+| # | Task | Folder | Status |
+|---|---|---|---|
+| 0.1 | Release pipeline: numbering, procedure, checks, packaging, GitHub release workflow | `scripts/`, `.github/` | ✅ |
+
 ## Phase 1 – Replicate on Firefox and Safari
 Goal: rebuild the existing Chrome extension (`chrome/`) 1:1.
 
