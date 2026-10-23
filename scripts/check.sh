@@ -9,7 +9,7 @@ TAG="${1:-}"
 fail() { echo "FAIL: $*" >&2; exit 1; }
 
 MANIFESTS=(chrome/manifest.json firefox/manifest.json safari/extension/manifest.json)
-SHARED=(content.js scores.js)
+SHARED=(content.js scores.js onboarding.html onboarding.js onboarding.css background.js)
 
 # 1. Manifests are valid JSON and contain no Uber trademark in the name
 for m in "${MANIFESTS[@]}"; do

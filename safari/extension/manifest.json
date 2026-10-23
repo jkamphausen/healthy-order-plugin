@@ -1,8 +1,18 @@
 {
   "manifest_version": 3,
   "name": "Healthy Order",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Research prototype: sorts categories on ubereats.com by healthiness and desaturates unhealthy ones. Not affiliated with Uber.",
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_ui": {
+    "page": "onboarding.html",
+    "open_in_tab": true
+  },
   "content_scripts": [
     {
       "matches": [

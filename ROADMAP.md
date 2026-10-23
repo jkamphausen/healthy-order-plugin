@@ -25,12 +25,12 @@ Demonstration only – no server connection, no analysis.
 
 | # | Task | Folder | Status |
 |---|---|---|---|
-| 2.1 | Onboarding page opens automatically on first run | all | ⬜ |
-| 2.2 | Field: user ID (number) | all | ⬜ |
-| 2.3 | Choice: gender – male / female / diverse | all | ⬜ |
-| 2.4 | Choice: age range – 4 ranges (proposal: 18–29, 30–44, 45–59, 60+) | all | ⬜ |
-| 2.5 | Stored in `storage.local`; kept until uninstall | all | ⬜ |
-| 2.6 | Entries can be changed later via the plugin's options page | all | ⬜ |
+| 2.1 | Onboarding page opens automatically on first run | all | ✅ |
+| 2.2 | Field: user ID (number) | all | ✅ |
+| 2.3 | Choice: gender – male / female / diverse | all | ✅ |
+| 2.4 | Choice: age range – 18–29 / 30–44 / 45–59 / 60+ | all | ✅ |
+| 2.5 | Stored in `storage.local`; kept until uninstall | all | ✅ |
+| 2.6 | Entries can be changed later via the plugin's options page | all | ✅ |
 
 Implement in Chrome first, then bring Firefox and Safari up to date (separate commits).
 
@@ -39,7 +39,8 @@ Ideas from the project summary, only after phase 2 and a team decision:
 - Central server that delivers the active condition per user ID and week (data only, no code)
 - Further conditions: sort shops, change colours, swap terms, control condition
 - Alternative target "more vegetarian" instead of "healthier" (separate score set)
-- Detect categories via language-independent link slugs instead of English names
+- ✅ Detect categories language-independently: done via the icon file name (`cuisine-filters/v1/<Name>.png`),
+  because the category links carry only an opaque query parameter, no slug. Labels (EN/DE) remain as fallback.
 - Monitoring when the category bar cannot be found
 - Distribution: Chrome unlisted, Firefox self-signed, Safari via TestFlight
 - Ethics approval, data protection concept, legal review (see project summary)
