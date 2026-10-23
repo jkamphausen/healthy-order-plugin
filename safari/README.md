@@ -2,9 +2,19 @@
 
 Sorts the category bar on ubereats.com from healthy (first) to unhealthy (last)
 and reduces the colour saturation of the icons the less healthy a category is.
-All changes happen locally in the browser. No data is collected. Not affiliated with Uber.
+All changes happen locally in the browser. Not affiliated with Uber.
 
-Identical in behaviour to `chrome/` (`content.js` and `scores.js` are the same).
+Identical in behaviour to `chrome/` (`content.js`, `scores.js`, `background.js` and the onboarding files are the same).
+
+## Onboarding and options page
+On first install the extension opens its onboarding page. It asks for consent and the three study fields
+(user ID assigned by the study team, gender, age range), shows a summary and stores the values only after
+confirmation. The data is kept in the extension's local storage of this browser and is never sent anywhere.
+
+To view, change or delete the data later, open the options page:
+Safari → **Settings → Extensions → Healthy Order → Edit Settings** (macOS) or the extension's entry in the
+Settings app → **Safari → Extensions** (iOS). Removing the extension deletes the data as well.
+The sorting and desaturation work independently of the onboarding.
 
 ## Structure
 - `extension/` – the actual web extension (Manifest V3, Safari 15.4+). **Develop only here.**
