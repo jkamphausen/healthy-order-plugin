@@ -39,7 +39,8 @@ Ideas from the project summary, only after phase 2 and a team decision:
 - Central server that delivers the active condition per user ID and week (data only, no code)
 - Further conditions: sort shops, change colours, swap terms, control condition
 - Alternative target "more vegetarian" instead of "healthier" (separate score set)
-- Detect categories via language-independent link slugs instead of English names
+- ✅ Detect categories language-independently: done via the icon file name (`cuisine-filters/v1/<Name>.png`),
+  because the category links carry only an opaque query parameter, no slug. Labels (EN/DE) remain as fallback.
 - Monitoring when the category bar cannot be found
 - Distribution: Chrome unlisted, Firefox self-signed, Safari via TestFlight
 - Ethics approval, data protection concept, legal review (see project summary)
