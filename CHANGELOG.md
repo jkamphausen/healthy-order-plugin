@@ -5,6 +5,8 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · Versioning: 
 
 ## [Unreleased]
 
+## [0.1.0-alpha.1] - 2026-10-23
+
 ### Added
 - Chrome extension: sorts the category bar on ubereats.com by health score and desaturates less healthy categories.
 - Firefox extension with identical behaviour.
