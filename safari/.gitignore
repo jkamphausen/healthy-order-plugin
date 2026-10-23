@@ -1,0 +1,5 @@
+# Xcode user data in the generated wrapper project
+HealthyOrder/**/xcuserdata/
+HealthyOrder/**/*.xcuserstate
+HealthyOrder/build/
+HealthyOrder/DerivedData/
