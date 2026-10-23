@@ -5,6 +5,13 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · Versioning: 
 
 ## [Unreleased]
 
+### Added
+- Onboarding page (all plugins): opens automatically on first install and is available as the options page.
+  Consent notice with required opt-in, fields user ID (positive integer), gender (male / female / diverse)
+  and age range (18–29 / 30–44 / 45–59 / 60+). Inputs are validated, a summary is shown before saving,
+  stored values can be viewed, edited and deleted. Data is kept in the browser's local extension storage only.
+- Consistency check now verifies that the onboarding files are identical across plugins.
+
 ## [0.1.0-alpha.1] - 2026-10-23
 
 ### Added
