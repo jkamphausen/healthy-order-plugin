@@ -1,12 +1,17 @@
 {
   "manifest_version": 3,
-  "name": "Healthy Order – Uber Eats",
+  "name": "Healthy Order",
   "version": "1.0.0",
-  "description": "Forschungsprototyp: sortiert die Uber-Eats-Kategorien nach Gesundheit und entsättigt ungesunde Kategorien.",
+  "description": "Forschungsprototyp: sortiert die Kategorien auf ubereats.com nach Gesundheit und entsättigt ungesunde Kategorien. Nicht mit Uber verbunden.",
   "content_scripts": [
     {
-      "matches": ["https://www.ubereats.com/*"],
-      "js": ["scores.js", "content.js"],
+      "matches": [
+        "https://www.ubereats.com/*"
+      ],
+      "js": [
+        "scores.js",
+        "content.js"
+      ],
       "run_at": "document_idle"
     }
   ]
