@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Healthy Order",
+  "version": "1.0.0",
+  "description": "Forschungsprototyp: sortiert die Kategorien auf ubereats.com nach Gesundheit und entsättigt ungesunde Kategorien. Nicht mit Uber verbunden.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "healthy-order@research.local",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.ubereats.com/*"],
+      "js": ["scores.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
