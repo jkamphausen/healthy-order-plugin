@@ -1,24 +1,24 @@
-# Healthy Order – Firefox-Erweiterung (Forschungsprototyp)
+# Healthy Order – Firefox extension (research prototype)
 
-Sortiert die Kategorie-Leiste auf ubereats.com von gesund (vorne) nach ungesund (hinten)
-und reduziert die Farbsättigung der Icons, je ungesünder die Kategorie ist.
-Die Änderung passiert nur lokal im Browser. Es werden keine Daten erhoben. Nicht mit Uber verbunden.
+Sorts the category bar on ubereats.com from healthy (first) to unhealthy (last)
+and reduces the colour saturation of the icons the less healthy a category is.
+All changes happen locally in the browser. No data is collected. Not affiliated with Uber.
 
-Inhaltlich identisch mit `chrome/` (`content.js` und `scores.js` sind gleich); nur das Manifest ist Firefox-spezifisch.
+Identical in behaviour to `chrome/` (`content.js` and `scores.js` are the same); only the manifest is Firefox-specific.
 
-## Temporär laden (Entwicklung)
-1. In Firefox `about:debugging#/runtime/this-firefox` öffnen.
-2. **Temporäres Add-on laden…** und `firefox/manifest.json` auswählen.
-3. Uber Eats neu laden. Das Add-on bleibt bis zum Firefox-Neustart aktiv.
+## Load temporarily (development)
+1. Open `about:debugging#/runtime/this-firefox` in Firefox.
+2. Click **Load Temporary Add-on…** and select `firefox/manifest.json`.
+3. Reload Uber Eats. The add-on stays active until Firefox restarts.
 
-## Dauerhaft installieren (Studie)
-Firefox verlangt signierte Add-ons. Signieren ohne Store-Listing über `web-ext`:
+## Install permanently (study)
+Firefox requires signed add-ons. Sign without a store listing using `web-ext`:
 ```
 npx web-ext sign --source-dir firefox --channel unlisted --api-key … --api-secret …
 ```
-Die erzeugte `.xpi` kann an Teilnehmende verteilt und per Doppelklick installiert werden.
-Mindestversion Firefox 140 (wegen `data_collection_permissions`).
+The resulting `.xpi` can be distributed to participants and installed by double-clicking.
+Minimum version Firefox 140 (because of `data_collection_permissions`).
 
-## Anpassen
-- Scores und Sättigungsstärke: `scores.js`
-- Nach Änderungen in `about:debugging` auf **Neu laden** klicken und die Seite neu laden.
+## Customising
+- Scores and saturation strength: `scores.js`
+- After changes, click **Reload** in `about:debugging` and reload the page.

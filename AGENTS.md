@@ -1,67 +1,68 @@
-# Regeln für Coding-Agenten (Codex, Claude, …)
+# Rules for coding agents (Codex, Claude, …)
 
-Diese Datei ist die einzige Quelle der Agenten-Regeln. `CLAUDE.md` importiert sie nur (`@AGENTS.md`)
-und darf keine eigenen Regeln enthalten – so bleiben beide synchron. Änderungen immer hier vornehmen.
+This file is the single source of agent rules. `CLAUDE.md` only imports it (`@AGENTS.md`)
+and must not contain rules of its own, so both stay in sync. Always make changes here.
 
-## Projekt
-Browser-Erweiterung „Healthy Order“ (Forschungsprototyp): verändert die Darstellung auf ubereats.com
-(Kategorien sortieren, Icons entsättigen). Drei Zielbrowser: Chrome, Firefox, Safari.
-Fahrplan und Prioritäten stehen in `ROADMAP.md` – sie ist verbindlich.
+## Project
+Browser extension "Healthy Order" (research prototype): changes how ubereats.com is displayed
+(sorts categories, desaturates icons). Three target browsers: Chrome, Firefox, Safari.
+Plan and priorities are in `ROADMAP.md`, which is binding.
 
-## Ordnerstruktur
-- Jedes Plugin wird ausschließlich in seinem eigenen Ordner entwickelt: `chrome/`, `firefox/`, `safari/`.
-- Kein geteilter Code zwischen den Ordnern, keine Symlinks, keine Build-Skripte, die in fremde Ordner schreiben.
-- Dateien außerhalb der Plugin-Ordner (README, ROADMAP, AGENTS, CLAUDE) sind Projektdateien.
+## Folder structure
+- Each plugin is developed exclusively in its own folder: `chrome/`, `firefox/`, `safari/`.
+- No shared code between folders, no symlinks, no build scripts that write into another plugin's folder.
+- Files outside the plugin folders (README, ROADMAP, AGENTS, CLAUDE) are project files.
 
-## Inhaltliche Gleichheit
-- Alle Plugins verhalten sich inhaltlich gleich (gleiche Features, gleiche Scores, gleiche Texte, gleiche
-  Onboarding-Felder), sofern `ROADMAP.md` nicht ausdrücklich eine Ausnahme festlegt.
-- Browserspezifisch dürfen nur sein: Manifest-Details, APIs (`chrome.*` vs. `browser.*`), Verpackung
-  (z. B. Xcode-Wrapper bei Safari).
-- Wer eine Funktion in einem Plugin ändert, zieht die anderen Plugins nach – in separaten Commits.
-- `chrome/` ist die Referenzimplementierung, solange die Roadmap nichts anderes sagt.
+## Feature parity
+- All plugins behave the same (same features, same scores, same texts, same onboarding fields),
+  unless `ROADMAP.md` explicitly defines an exception.
+- Only these may be browser-specific: manifest details, APIs (`chrome.*` vs. `browser.*`), packaging
+  (e.g. the Xcode wrapper for Safari).
+- Whoever changes a feature in one plugin brings the other plugins up to date, in separate commits.
+- `chrome/` is the reference implementation unless the roadmap says otherwise.
 
-## Git-Workflow
-- Entwickelt wird nur in Feature-Branches: `feature/<kurz-beschreibung>` von `dev` abzweigen.
-- Feature-Branches werden nach `dev` gemerged. Niemals direkt auf `dev` oder `main` committen.
-- `main` ist immer releasable: nur getestete, vollständige Stände aus `dev` nach `main` mergen.
-- Änderungen an verschiedenen Plugins werden immer separat committet
-  (ein Commit berührt nur einen Plugin-Ordner; Projektdateien ggf. als eigener Commit).
-- Commit-Präfix nach Ordner: `chrome:`, `firefox:`, `safari:`, `docs:`, `repo:`.
-- Commit-Beschreibungen: kurz, knapp, präzise. Eine Zeile (max. ~60 Zeichen), Imperativ, sagt *was* sich ändert.
-  Gut: `firefox: Manifest für MV3 mit Gecko-ID anlegen`. Schlecht: `Updates`, `diverse Fixes`, lange Prosa.
-- Agenten committen nur, wenn ausdrücklich darum gebeten.
+## Git workflow
+- Development happens only in feature branches: branch `feature/<short-description>` off `dev`.
+- Feature branches are merged into `dev`. Never commit directly to `dev` or `main`.
+- `main` is always releasable: only merge tested, complete states from `dev` into `main`.
+- Changes to different plugins are always committed separately
+  (one commit touches only one plugin folder; project files go into their own commit if needed).
+- Commit prefix by folder: `chrome:`, `firefox:`, `safari:`, `docs:`, `repo:`.
+- Commit messages: short, concise, precise. One line (max. ~60 characters), imperative mood, states *what* changes.
+  Good: `firefox: add MV3 manifest with Gecko ID`. Bad: `Updates`, `various fixes`, long prose.
+- Agents only commit when explicitly asked to.
 
-## Datenschutz (verbindlich bei jeder Implementierung)
-- Nur anonymisierte Daten: Es werden keine Daten erhoben oder gespeichert, die eine Person identifizieren
-  (kein Name, keine E-Mail, keine Uber-Kontodaten, keine IP-Adressen, keine Geräte-Fingerprints).
-- Keine Verknüpfung: Die Nutzer-ID ist eine vom Studienteam vergebene Zufallsnummer. Das Plugin verknüpft sie
-  nicht mit Uber-Konten, Browserprofilen oder anderen Kennungen und leitet nichts davon ab.
-- Datensparsamkeit: Nur die Felder erheben, die `ROADMAP.md` nennt. Grobe Kategorien statt exakter Werte
-  (Altersspanne statt Geburtsdatum). Nichts „auf Vorrat“ speichern.
-- Korrektheit: Eingaben werden validiert (ID = positive ganze Zahl, Pflichtfelder, nur die vorgegebenen
-  Auswahlwerte). Ungültige Eingaben werden abgewiesen, nicht stillschweigend korrigiert. Was gespeichert
-  wird, wird dem Nutzer vor dem Speichern angezeigt und ist nachträglich einsehbar und änderbar.
-- Lokal zuerst: Daten bleiben in `storage.local` des Browsers. Keine Übertragung an Server, solange die
-  Roadmap das nicht ausdrücklich freigibt; dann nur über HTTPS, nur die freigegebenen Felder, mit Einwilligung.
-- Einwilligung: Jede Erhebung beginnt mit einem verständlichen Hinweis (Zweck, Felder, Speicherort,
-  Löschmöglichkeit) und einer aktiven Zustimmung. Ohne Zustimmung keine Speicherung.
-- Löschen: Der Nutzer kann alle gespeicherten Daten jederzeit im Plugin löschen; Deinstallation löscht sie
-  ebenfalls.
-- Keine Seiteninhalte: Das Plugin liest keine Inhalte von ubereats.com aus und speichert kein Verhalten
-  (Klicks, Bestellungen, Shops), solange die Roadmap das nicht vorsieht.
-- Im Zweifel: Lieber ein Feld weniger. Datenschutzfragen vor der Umsetzung in `ROADMAP.md` notieren.
+## Data protection (binding for every implementation)
+- Anonymous data only: no data that identifies a person is collected or stored
+  (no name, no email, no Uber account data, no IP addresses, no device fingerprints).
+- No linking: the user ID is a random number assigned by the study team. The plugin does not link it
+  to Uber accounts, browser profiles or other identifiers, and derives nothing from them.
+- Data minimisation: collect only the fields named in `ROADMAP.md`. Coarse categories instead of exact values
+  (age range instead of date of birth). Never store anything "just in case".
+- Correctness: inputs are validated (ID = positive integer, required fields, only the predefined
+  choice values). Invalid input is rejected, never silently corrected. What will be stored is shown
+  to the user before saving and can be viewed and changed afterwards.
+- Local first: data stays in the browser's `storage.local`. No transfer to servers unless the
+  roadmap explicitly allows it; then only via HTTPS, only the approved fields, and only with consent.
+- Consent: every collection starts with a clear notice (purpose, fields, storage location,
+  how to delete) and an active opt-in. No consent, no storage.
+- Deletion: the user can delete all stored data at any time inside the plugin; uninstalling also
+  deletes it.
+- No page content: the plugin does not read content from ubereats.com and does not store behaviour
+  (clicks, orders, shops) unless the roadmap provides for it.
+- When in doubt: one field fewer. Note data protection questions in `ROADMAP.md` before implementing.
 
-## Technische Leitplanken
-- Manifest V3 für Chrome und Safari; Firefox MV3 mit `browser_specific_settings.gecko`.
-- Kein Code wird zur Laufzeit von einem Server nachgeladen (Store-Richtlinien). Server liefern nur Daten.
-- Nutzer-ID und demografische Angaben werden ausschließlich in `storage.local` gespeichert.
-- Keine Uber-Marken (Name, Logo) im Plugin-Namen oder in Screenshots. Hinweis „nicht mit Uber verbunden“.
-- Keine Daten von der Uber-Seite auslesen oder versenden, solange die Roadmap das nicht vorsieht.
-- Alles, was die Seite verändert, muss Neuzeichnen der React-Oberfläche überleben (MutationObserver).
+## Technical guardrails
+- Manifest V3 for Chrome and Safari; Firefox MV3 with `browser_specific_settings.gecko`.
+- No code is loaded from a server at runtime (store policies). Servers deliver data only.
+- User ID and demographic data are stored exclusively in `storage.local`.
+- No Uber trademarks (name, logo) in the plugin name or in screenshots. Include "Not affiliated with Uber".
+- Do not read or send data from the Uber page unless the roadmap provides for it.
+- Everything that modifies the page must survive re-renders of the React UI (MutationObserver).
 
-## Arbeitsweise
-- Vor jeder Aufgabe `ROADMAP.md` lesen und den betroffenen Punkt benennen.
-- Nach jeder abgeschlossenen Aufgabe den Status in `ROADMAP.md` aktualisieren (eigener `docs:`-Commit).
-- Kleine, nachvollziehbare Änderungen; keine Umbauten „nebenbei“.
-- Sprache in Code-Kommentaren und Docs: Deutsch. Bezeichner im Code: Englisch.
+## Way of working
+- Read `ROADMAP.md` before every task and name the item it concerns.
+- After finishing a task, update its status in `ROADMAP.md` (separate `docs:` commit).
+- Small, traceable changes; no unrelated refactoring "on the side".
+- English is the working language: code, identifiers, comments, commit messages, branch names,
+  documentation, release notes and the plugin's UI texts. Exceptions only if `ROADMAP.md` defines them.

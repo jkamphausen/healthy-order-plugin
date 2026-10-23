@@ -5,7 +5,7 @@
   const score = (label) => (label in S ? S[label] : DEF);
   const label = (el) => el.textContent.trim();
 
-  // Findet die Kategorie-Leiste: Container mit vielen Kindern, die ein Bild + bekannte Kategorie enthalten.
+  // Finds the category bar: a container with many children that hold an image + a known category.
   function findRow() {
     const anchorLi = [...document.querySelectorAll("li")].find((li) => label(li) in S && li.querySelector("img"));
     if (!anchorLi) return null;
@@ -27,7 +27,7 @@
     const spacers = kids.filter((c) => !c.querySelector("img"));
     const sorted = [...items].sort((a, b) => score(label(a)) - score(label(b)));
 
-    // Abstandshalter (leere DIVs) wieder zwischen die Items setzen
+    // Put the spacers (empty DIVs) back between the items
     const desired = [];
     sorted.forEach((it, i) => {
       desired.push(it);
@@ -36,7 +36,7 @@
     spacers.slice(Math.max(0, sorted.length - 1)).forEach((s) => desired.push(s));
     if (desired.some((el, i) => kids[i] !== el)) desired.forEach((el) => row.appendChild(el));
 
-    // Je ungesünder, desto weniger Sättigung
+    // The less healthy, the less saturation
     sorted.forEach((it) => {
       const sat = Math.max(0.05, 1 - score(label(it)) * STEP).toFixed(2);
       const f = `saturate(${sat})`;
@@ -49,7 +49,7 @@
     });
   }
 
-  // Uber Eats ist eine React-App und zeichnet neu → bei DOM-Änderungen erneut anwenden
+  // Uber Eats is a React app and re-renders → re-apply on DOM changes
   let scheduled = false;
   const observer = new MutationObserver(() => {
     if (scheduled) return;

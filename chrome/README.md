@@ -1,41 +1,38 @@
-# Healthy Order
+# Healthy Order – Chrome extension (research prototype)
 
-Forschungsprototyp einer Browser-Erweiterung, die die Kategorie-Leiste auf ubereats.com von gesund (vorne) nach ungesund (hinten) sortiert. Je ungesünder eine Kategorie ist, desto weniger farbig wird ihr Icon dargestellt.
+Research prototype of a browser extension that sorts the category bar on ubereats.com from healthy (first) to unhealthy (last). The less healthy a category is, the less colourful its icon is shown.
 
-Die Änderungen passieren nur lokal im Browser. Das Projekt steht in keiner Verbindung zu Uber.
+All changes happen locally in the browser. The project is not affiliated with Uber.
 
-## Status
+This is the reference implementation for `firefox/` and `safari/` (see `AGENTS.md`).
 
-Prototyp für Chrome (Manifest V3). Firefox, Safari, Ersteinrichtung und Serveranbindung sind geplant, aber noch nicht umgesetzt (siehe `ZUSAMMENFASSUNG.md`).
+## Installation
 
-## Installation (Chrome)
+1. Clone the repo or unpack the ZIP.
+2. Open `chrome://extensions` and turn on **Developer mode** (top right).
+3. Click **Load unpacked** and select the `chrome/` folder.
+4. Reload ubereats.com.
 
-1. Repo klonen oder ZIP entpacken.
-2. `chrome://extensions` öffnen und oben rechts den **Entwicklermodus** einschalten.
-3. **Entpackte Erweiterung laden** und den Projektordner wählen.
-4. ubereats.com neu laden.
+## Files
 
-## Dateien
-
-| Datei | Zweck |
+| File | Purpose |
 |---|---|
-| `manifest.json` | Erweiterungs-Manifest; läuft nur auf `https://www.ubereats.com/*` |
-| `scores.js` | Gesundheits-Score je Kategorie (0 = gesund, 10 = ungesund) und Stärke der Entsättigung |
-| `content.js` | Findet die Kategorie-Leiste, sortiert sie und setzt den Sättigungsfilter; wendet beides nach Neuzeichnen der Seite erneut an |
-| `ZUSAMMENFASSUNG.md` | Konzept, Ausbauplan, Store-Verteilung, methodische und rechtliche Einschätzung |
+| `manifest.json` | Extension manifest; runs only on `https://www.ubereats.com/*` |
+| `scores.js` | Health score per category (0 = healthy, 10 = unhealthy) and strength of the desaturation |
+| `content.js` | Finds the category bar, sorts it and applies the saturation filter; re-applies both after the page re-renders |
 
-## Anpassen
+## Customising
 
-Scores und Entsättigung in `scores.js` ändern. Danach in `chrome://extensions` beim Plugin auf ↻ klicken und die Seite neu laden. Kategorien ohne Eintrag bekommen den Score 5.
+Change scores and desaturation in `scores.js`. Then click ↻ on the extension in `chrome://extensions` and reload the page. Categories without an entry get a score of 5.
 
-Die Scores sind eine grobe Einschätzung und keine validierte Ernährungsskala.
+The scores are a rough estimate, not a validated nutrition scale.
 
-## Bekannte Grenzen
+## Known limitations
 
-- Die Leiste wird über englische Kategorienamen erkannt. Bei deutscher Oberfläche greift das Plugin nicht.
-- Uber Eats nutzt verschleierte CSS-Klassen und kann die Seitenstruktur jederzeit ändern.
-- Nur die sichtbare Icon-Leiste wird verändert.
+- The bar is detected by English category names. With a German UI the plugin does not take effect.
+- Uber Eats uses obfuscated CSS classes and can change the page structure at any time.
+- Only the visible icon bar is modified.
 
-## Hinweis
+## Note
 
-Vor einem Einsatz mit Teilnehmenden müssen Datenschutz, Ethikvotum und rechtliche Fragen geklärt sein (Details in `ZUSAMMENFASSUNG.md`).
+Before use with participants, data protection, ethics approval and legal questions must be resolved (see `ROADMAP.md`).

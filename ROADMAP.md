@@ -1,39 +1,39 @@
 # Roadmap – Healthy Order
 
-Verbindlicher Fahrplan für alle Plugins (siehe `AGENTS.md`). Status: ⬜ offen · 🔄 in Arbeit · ✅ fertig
+Binding plan for all plugins (see `AGENTS.md`). Status: ⬜ open · 🔄 in progress · ✅ done
 
-## Phase 1 – Replikation auf Firefox und Safari
-Ziel: Die vorhandene Chrome-Erweiterung (`chrome/`) 1:1 nachbauen.
+## Phase 1 – Replicate on Firefox and Safari
+Goal: rebuild the existing Chrome extension (`chrome/`) 1:1.
 
-| # | Aufgabe | Ordner | Status |
+| # | Task | Folder | Status |
 |---|---|---|---|
-| 1.1 | Firefox-Erweiterung mit identischem Verhalten (Sortierung + Entsättigung) | `firefox/` | ✅ |
-| 1.2 | Safari-Erweiterung (Xcode-Wrapper, macOS + iOS) mit identischem Verhalten | `safari/` | 🔄 Web-Extension fertig; Xcode-Projekt per Konverter auf dem Mac erzeugen (siehe `safari/README.md`) |
-| 1.3 | Installationsanleitung je Plugin (README im Ordner) | alle | ✅ |
+| 1.1 | Firefox extension with identical behaviour (sorting + desaturation) | `firefox/` | ✅ |
+| 1.2 | Safari extension (Xcode wrapper, macOS + iOS) with identical behaviour | `safari/` | 🔄 Web extension done; generate the Xcode project with the converter on a Mac (see `safari/README.md`) |
+| 1.3 | Installation guide per plugin (README in each folder) | all | ✅ |
 
-Referenz: `chrome/content.js`, `chrome/scores.js`, `chrome/manifest.json`.
+Reference: `chrome/content.js`, `chrome/scores.js`, `chrome/manifest.json`.
 
-## Phase 2 – Onboarding (exemplarisch)
-Ziel: Zeigen, dass Teilnehmerdaten im Plugin erfasst und dauerhaft gespeichert werden können.
-Nur Demonstration – keine Server-Anbindung, keine Auswertung.
+## Phase 2 – Onboarding (demonstration)
+Goal: show that participant data can be entered in the plugin and stored persistently.
+Demonstration only – no server connection, no analysis.
 
-| # | Aufgabe | Ordner | Status |
+| # | Task | Folder | Status |
 |---|---|---|---|
-| 2.1 | Onboarding-Seite öffnet sich beim ersten Start automatisch | alle | ⬜ |
-| 2.2 | Feld: Nutzer-ID (Zahl) | alle | ⬜ |
-| 2.3 | Auswahl: Geschlecht – männlich / weiblich / divers | alle | ⬜ |
-| 2.4 | Auswahl: Altersspanne – 4 Spannen (Vorschlag: 18–29, 30–44, 45–59, 60+) | alle | ⬜ |
-| 2.5 | Speicherung in `storage.local`; bleibt bis zur Deinstallation erhalten | alle | ⬜ |
-| 2.6 | Eingaben über die Optionsseite des Plugins nachträglich änderbar | alle | ⬜ |
+| 2.1 | Onboarding page opens automatically on first run | all | ⬜ |
+| 2.2 | Field: user ID (number) | all | ⬜ |
+| 2.3 | Choice: gender – male / female / diverse | all | ⬜ |
+| 2.4 | Choice: age range – 4 ranges (proposal: 18–29, 30–44, 45–59, 60+) | all | ⬜ |
+| 2.5 | Stored in `storage.local`; kept until uninstall | all | ⬜ |
+| 2.6 | Entries can be changed later via the plugin's options page | all | ⬜ |
 
-Erst Chrome umsetzen, dann Firefox und Safari nachziehen (separate Commits).
+Implement in Chrome first, then bring Firefox and Safari up to date (separate commits).
 
-## Später (noch nicht freigegeben)
-Ideen aus der Projektzusammenfassung, erst nach Phase 2 und nach Entscheidung des Teams:
-- Zentraler Server, der pro Nutzer-ID und Woche die aktive Bedingung liefert (nur Daten, kein Code)
-- Weitere Bedingungen: Shops sortieren, Farben ändern, Begriffe tauschen, Kontrollbedingung
-- Alternative Zielrichtung „vegetarischer“ statt „gesünder“ (eigener Score-Satz)
-- Erkennung der Kategorien über sprachunabhängige Link-Slugs statt englischer Namen
-- Monitoring, wenn die Kategorie-Leiste nicht gefunden wird
-- Verteilung: Chrome nicht gelistet, Firefox selbst signiert, Safari via TestFlight
-- Ethikvotum, Datenschutzkonzept, rechtliche Prüfung (siehe Projektzusammenfassung)
+## Later (not yet approved)
+Ideas from the project summary, only after phase 2 and a team decision:
+- Central server that delivers the active condition per user ID and week (data only, no code)
+- Further conditions: sort shops, change colours, swap terms, control condition
+- Alternative target "more vegetarian" instead of "healthier" (separate score set)
+- Detect categories via language-independent link slugs instead of English names
+- Monitoring when the category bar cannot be found
+- Distribution: Chrome unlisted, Firefox self-signed, Safari via TestFlight
+- Ethics approval, data protection concept, legal review (see project summary)
