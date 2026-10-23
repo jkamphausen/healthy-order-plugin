@@ -1,18 +1,18 @@
-# Healthy Order – Browser-Erweiterung (Forschungsprototyp)
+# Healthy Order – browser extension (research prototype)
 
-Verändert die Darstellung auf ubereats.com: gesündere Kategorien vorne, ungesündere hinten und entsättigt.
-Nicht mit Uber verbunden.
+Changes how ubereats.com is displayed: healthier categories first, less healthy ones last and desaturated.
+Not affiliated with Uber.
 
-| Ordner/Datei | Inhalt |
+| Folder/file | Contents |
 |---|---|
-| `chrome/` | Chrome-Erweiterung (Manifest V3) – Referenzimplementierung, Installation siehe `chrome/README.md` |
-| `firefox/` | Firefox-Erweiterung (im Aufbau) |
-| `safari/` | Safari-Erweiterung, Xcode-Projekt (im Aufbau) |
-| `ROADMAP.md` | Verbindlicher Fahrplan mit Status |
-| `AGENTS.md` | Regeln für Coding-Agenten (Codex) – einzige Quelle |
-| `CLAUDE.md` | Importiert `AGENTS.md` für Claude Code |
+| `chrome/` | Chrome extension (Manifest V3) – reference implementation, installation see `chrome/README.md` |
+| `firefox/` | Firefox extension, installation see `firefox/README.md` |
+| `safari/` | Safari extension (web extension + Xcode project), see `safari/README.md` |
+| `ROADMAP.md` | Binding plan with status |
+| `AGENTS.md` | Rules for coding agents (Codex) – single source |
+| `CLAUDE.md` | Imports `AGENTS.md` for Claude Code |
 
 ## Branches
-- `main` – immer releasable
-- `dev` – Integrationsbranch
-- `feature/*` – Entwicklung, wird nach `dev` gemerged
+- `main` – always releasable
+- `dev` – integration branch
+- `feature/*` – development, merged into `dev`
