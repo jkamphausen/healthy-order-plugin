@@ -25,12 +25,12 @@ Demonstration only – no server connection, no analysis.
 
 | # | Task | Folder | Status |
 |---|---|---|---|
-| 2.1 | Onboarding page opens automatically on first run | all | ⬜ |
-| 2.2 | Field: user ID (number) | all | ⬜ |
-| 2.3 | Choice: gender – male / female / diverse | all | ⬜ |
-| 2.4 | Choice: age range – 4 ranges (proposal: 18–29, 30–44, 45–59, 60+) | all | ⬜ |
-| 2.5 | Stored in `storage.local`; kept until uninstall | all | ⬜ |
-| 2.6 | Entries can be changed later via the plugin's options page | all | ⬜ |
+| 2.1 | Onboarding page opens automatically on first run | all | ✅ |
+| 2.2 | Field: user ID (number) | all | ✅ |
+| 2.3 | Choice: gender – male / female / diverse | all | ✅ |
+| 2.4 | Choice: age range – 18–29 / 30–44 / 45–59 / 60+ | all | ✅ |
+| 2.5 | Stored in `storage.local`; kept until uninstall | all | ✅ |
+| 2.6 | Entries can be changed later via the plugin's options page | all | ✅ |
 
 Implement in Chrome first, then bring Firefox and Safari up to date (separate commits).
 

@@ -11,7 +11,20 @@ This is the reference implementation for `firefox/` and `safari/` (see `AGENTS.m
 1. Clone the repo or unpack the ZIP.
 2. Open `chrome://extensions` and turn on **Developer mode** (top right).
 3. Click **Load unpacked** and select the `chrome/` folder.
-4. Reload ubereats.com.
+4. The onboarding page opens automatically on first install (consent notice, user ID, gender, age range).
+5. Reload ubereats.com.
+
+## Onboarding and options page
+
+On first install the extension opens its onboarding page. It asks for consent and the three study
+fields (user ID assigned by the study team, gender, age range), shows a summary and stores the values
+only after confirmation. The data is kept in `chrome.storage.local` of this browser and is never sent anywhere.
+
+To view, change or delete the data later, open the options page:
+`chrome://extensions` → **Healthy Order** → **Details** → **Extension options**
+(or right-click the extension icon → **Options**). Uninstalling the extension deletes the data as well.
+
+The sorting and desaturation on ubereats.com work independently of the onboarding.
 
 ## Files
 
@@ -20,6 +33,8 @@ This is the reference implementation for `firefox/` and `safari/` (see `AGENTS.m
 | `manifest.json` | Extension manifest; runs only on `https://www.ubereats.com/*` |
 | `scores.js` | Health score per category (0 = healthy, 10 = unhealthy) and strength of the desaturation |
 | `content.js` | Finds the category bar, sorts it and applies the saturation filter; re-applies both after the page re-renders |
+| `background.js` | Service worker; opens the onboarding page once after installation |
+| `onboarding.html/.css/.js` | Onboarding and options page: consent, user ID, gender, age range; stored in `chrome.storage.local` |
 
 ## Customising
 
