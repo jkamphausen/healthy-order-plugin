@@ -9,6 +9,8 @@ Not affiliated with Uber.
 | `firefox/` | Firefox extension, installation see `firefox/README.md` |
 | `safari/` | Safari extension (web extension + Xcode project), see `safari/README.md` |
 | `ROADMAP.md` | Binding plan with status |
+| `CHANGELOG.md` | Changes per release |
+| `scripts/` | `check.sh` (consistency), `package.sh` (release archives), `release-notes.sh` |
 | `AGENTS.md` | Rules for coding agents (Codex) – single source |
 | `CLAUDE.md` | Imports `AGENTS.md` for Claude Code |
 
@@ -16,3 +18,8 @@ Not affiliated with Uber.
 - `main` – always releasable
 - `dev` – integration branch
 - `feature/*` – development, merged into `dev`
+- `release/*` – release preparation, merged into `dev`, then `dev` into `main`
+
+## Releases
+Tags `vMAJOR.MINOR.PATCH[-alpha|beta|rc.N]` on `main` trigger the GitHub release workflow.
+Numbering and procedure: `AGENTS.md` → *Releases*.
