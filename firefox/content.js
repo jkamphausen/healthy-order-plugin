@@ -2,19 +2,49 @@
   const S = window.HEALTH_SCORES;
   const DEF = window.HEALTH_DEFAULT_SCORE;
   const STEP = window.HEALTH_DESAT_PER_POINT;
-  const score = (label) => (label in S ? S[label] : DEF);
-  const label = (el) => el.textContent.trim();
 
-  // Finds the category bar: a container with many children that hold an image + a known category.
+  // alias (normalised) → category ID
+  const norm = (s) => String(s).trim().toLowerCase().replace(/\s+/g, " ");
+  const ALIAS = new Map();
+  for (const [id, names] of Object.entries(window.HEALTH_ALIASES)) names.forEach((n) => ALIAS.set(norm(n), id));
+
+  const label = (el) => el.textContent.trim();
+  const isItem = (el) => Boolean(el.querySelector("img"));
+
+  // Language-independent key: the icon file name without extension (e.g. ".../v1/Salad.png" → "Salad").
+  function imageKey(el) {
+    const img = el.querySelector("img");
+    const src = img && (img.getAttribute("src") || "");
+    const file = src.split("?")[0].split("/").pop() || "";
+    return file.replace(/\.[a-z0-9]+$/i, "");
+  }
+
+  // Category ID of an item, or null. The icon key is preferred over the (translated) label.
+  function categoryId(el) {
+    return ALIAS.get(norm(imageKey(el))) || ALIAS.get(norm(label(el))) || null;
+  }
+
+  // Unknown categories: default score, logged once per label so the alias table can be extended.
+  const reported = new Set();
+  function score(el) {
+    const id = categoryId(el);
+    if (id) return S[id];
+    const l = label(el);
+    if (!reported.has(l)) { reported.add(l); console.debug("[Healthy Order] unknown category:", l); }
+    return DEF;
+  }
+
+  // Finds the category bar: a container with many children, at least 5 of them holding an icon of a known category.
   function findRow() {
-    const anchorLi = [...document.querySelectorAll("li")].find((li) => label(li) in S && li.querySelector("img"));
-    if (!anchorLi) return null;
-    let el = anchorLi;
-    while (el.parentElement && el.parentElement !== document.body) {
-      const p = el.parentElement;
-      const known = [...p.children].filter((c) => c.querySelector("img") && label(c) in S).length;
-      if (known >= 5) return p;
-      el = p;
+    const seen = new Set();
+    for (const img of document.querySelectorAll("img")) {
+      let el = img;
+      while (el.parentElement && el.parentElement !== document.body && el.parentElement.children.length < 5) el = el.parentElement;
+      const row = el.parentElement;
+      if (!row || row === document.body || seen.has(row)) continue;
+      seen.add(row);
+      const known = [...row.children].filter((c) => isItem(c) && categoryId(c)).length;
+      if (known >= 5) return row;
     }
     return null;
   }
@@ -23,22 +53,22 @@
     const row = findRow();
     if (!row) return;
     const kids = [...row.children];
-    const items = kids.filter((c) => c.querySelector("img"));
-    const spacers = kids.filter((c) => !c.querySelector("img"));
-    const sorted = [...items].sort((a, b) => score(label(a)) - score(label(b)));
+    const slots = kids.map((c, i) => i).filter((i) => isItem(kids[i]));
+    const items = slots.map((i) => kids[i]);
+    const sorted = [...items].sort((a, b) => score(a) - score(b)); // stable: equal scores keep page order
 
-    // Put the spacers (empty DIVs) back between the items
-    const desired = [];
-    sorted.forEach((it, i) => {
-      desired.push(it);
-      if (i < sorted.length - 1 && spacers[i]) desired.push(spacers[i]);
-    });
-    spacers.slice(Math.max(0, sorted.length - 1)).forEach((s) => desired.push(s));
-    if (desired.some((el, i) => kids[i] !== el)) desired.forEach((el) => row.appendChild(el));
+    // Permute only the items among the item slots; spacers and other children stay where they are.
+    if (sorted.some((it, i) => it !== items[i])) {
+      const desired = kids.slice();
+      slots.forEach((slot, j) => { desired[slot] = sorted[j]; });
+      desired.forEach((el, i) => {
+        if (row.children[i] !== el) row.insertBefore(el, row.children[i] || null);
+      });
+    }
 
     // The less healthy, the less saturation
     sorted.forEach((it) => {
-      const sat = Math.max(0.05, 1 - score(label(it)) * STEP).toFixed(2);
+      const sat = Math.max(0.05, 1 - score(it) * STEP).toFixed(2);
       const f = `saturate(${sat})`;
       it.querySelectorAll("img").forEach((img) => {
         if (img.style.filter !== f) {
@@ -49,7 +79,8 @@
     });
   }
 
-  // Uber Eats is a React app and re-renders → re-apply on DOM changes
+  // Uber Eats is a React app and re-renders → re-apply on DOM changes.
+  // The observer is disconnected while apply() runs, so our own changes never trigger it again.
   let scheduled = false;
   const observer = new MutationObserver(() => {
     if (scheduled) return;
